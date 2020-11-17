@@ -616,5 +616,5 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	lgr.Info.Println("Request at /api/consensus/transactions responding" +
 		"with all transactions in specified Block!")
 	json.NewEncoder(w).Encode(responses.TransactionsResponse{
-		Transactions: transactions.Transactions})
+		Transactions: transactions.Transactions, Results: transactions.Results})
 }
