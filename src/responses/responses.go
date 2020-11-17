@@ -9,13 +9,14 @@ import (
 	common_node "github.com/oasisprotocol/oasis-core/go/common/node"
 	common_quantity "github.com/oasisprotocol/oasis-core/go/common/quantity"
 	consensus_api "github.com/oasisprotocol/oasis-core/go/consensus/api"
+	"github.com/oasisprotocol/oasis-core/go/consensus/api/transaction/results"
 	epoch_api "github.com/oasisprotocol/oasis-core/go/epochtime/api"
+	document_api "github.com/oasisprotocol/oasis-core/go/genesis/api"
 	gen_api "github.com/oasisprotocol/oasis-core/go/genesis/api"
 	registry_api "github.com/oasisprotocol/oasis-core/go/registry/api"
 	scheduler_api "github.com/oasisprotocol/oasis-core/go/scheduler/api"
 	sentry_api "github.com/oasisprotocol/oasis-core/go/sentry/api"
 	staking_api "github.com/oasisprotocol/oasis-core/go/staking/api"
-	document_api "github.com/oasisprotocol/oasis-core/go/genesis/api"
 	tmed "github.com/tendermint/tendermint/crypto"
 	mint_types "github.com/tendermint/tendermint/types"
 )
@@ -164,7 +165,8 @@ type EntitiesResponse struct {
 
 // TransactionsResponse responds with all transactions in block
 type TransactionsResponse struct {
-	Transactions [][]byte `json:"result"`
+	Transactions [][]byte          `json:"transactions"`
+	Results      []*results.Result `json:"results"`
 }
 
 // BlockHeaderResponse responds with Tendermint Header Type

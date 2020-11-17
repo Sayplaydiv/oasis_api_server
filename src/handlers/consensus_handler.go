@@ -104,7 +104,7 @@ func GetEpoch(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -167,7 +167,7 @@ func PingNode(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 		lgr.Info.Println("Node name requested doesn't exist")
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -221,7 +221,7 @@ func GetBlock(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -282,7 +282,7 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -322,7 +322,6 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(responses.StatusResponse{Status: status})
 }
 
-
 // GetGenesisDocument returns the original genesis document.
 func GetGenesisDocument(w http.ResponseWriter, r *http.Request) {
 
@@ -332,7 +331,7 @@ func GetGenesisDocument(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -370,9 +369,8 @@ func GetGenesisDocument(w http.ResponseWriter, r *http.Request) {
 	// Responding with retrieved block
 	lgr.Info.Println(
 		"Request at /api/consensus/genesisdocument responding with Genesis " +
-		"Document!")
-	json.NewEncoder(w).Encode(responses.GenesisDocumentResponse{GenesisDocument: 
-		genesisDocument})
+			"Document!")
+	json.NewEncoder(w).Encode(responses.GenesisDocumentResponse{GenesisDocument: genesisDocument})
 }
 
 // GetBlockHeader returns consensus block header at specific height
@@ -384,7 +382,7 @@ func GetBlockHeader(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -458,7 +456,7 @@ func GetBlockLastCommit(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -566,7 +564,7 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	// Retrieving name of node from query request
 	nodeName := r.URL.Query().Get("name")
 	confirmation, socket := checkNodeName(nodeName)
-	if !confirmation  {
+	if !confirmation {
 
 		// Stop code here no need to establish connection and reply
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
@@ -604,7 +602,7 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 
 	// Use consensus client to retrieve transactions at specific block
 	// height
-	transactions, err := co.GetTransactions(context.Background(), height)
+	transactions, err := co.GetTransactionsWithResults(context.Background(), height)
 	if err != nil {
 		json.NewEncoder(w).Encode(responses.ErrorResponse{
 			Error: "Failed to retrieve Transactions!"})
@@ -618,5 +616,5 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	lgr.Info.Println("Request at /api/consensus/transactions responding" +
 		"with all transactions in specified Block!")
 	json.NewEncoder(w).Encode(responses.TransactionsResponse{
-		Transactions: transactions})
+		Transactions: transactions.Transactions})
 }
