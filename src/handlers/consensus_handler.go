@@ -15,8 +15,6 @@ import (
 	consensus "github.com/oasisprotocol/oasis-core/go/consensus/api"
 	mint_api "github.com/oasisprotocol/oasis-core/go/consensus/tendermint/api"
 	"github.com/oasisprotocol/oasis-core/go/consensus/tendermint/crypto"
-	oasisGrpc_1 "github.com/oasisprotocol_1/oasis-core/go/common/grpc"
-	consensus_1 "github.com/oasisprotocol_1/oasis-core/go/consensus/api"
 )
 
 // loadConsensusClient loads consensus client and returns it
@@ -293,18 +291,11 @@ func GetStatus(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Attempt to load connection with consensus client
-	//connection, co := loadConsensusClient(socket)
-	//
-	//// Close connection once code underneath executes
-	//defer connection.Close()
+	connection, co := loadConsensusClient(socket)
 
-	conn, err := oasisGrpc_1.Dial("unix:/node/data/internal.sock", grpc.WithInsecure())
-	if err != nil {
-		json.NewEncoder(w).Encode(responses.ErrorResponse{
-			Error: err.Error()})
-		return
-	}
-	co := consensus_1.NewConsensusClient(conn)
+	// Close connection once code underneath executes
+	defer connection.Close()
+
 	// If null object was retrieved send response
 	if co == nil {
 
