@@ -1,5 +1,11 @@
 # Oasis API Server
 
+## 这里这里这里这里：
+### user_config_nodes.ini配置 修改sock目录
+### user_config_sentry.ini配置 修改tls_path目录（在链同步数据的文件中）
+### 节点启动指令需要添加grpc启动服务：./oasis-node --config /data/node/etc/config.yml --datadir /data/node/data/ --worker.sentry.grpc.enabled  --worker.sentry.enabled
+
+
 [![version](https://img.shields.io/github/tag/SimplyVC/oasis_api_server.svg)](https://github.com/SimplyVC/oasis_api_server/releases/latest)
 [![Go Report Card](https://goreportcard.com/badge/github.com/SimplyVC/oasis_api_server)](https://goreportcard.com/report/github.com/SimplyVC/oasis_api_server)
 [![LoC](https://tokei.rs/b1/github/SimplyVC/oasis_api_server)](https://github.com/SimplyVC/oasis_api_server)
@@ -19,3 +25,6 @@ If you want to dive into the design and feature set of the API Server [click her
 ## Ready, Set, Query!
 
 If you are ready to try out the API Server on your Oasis nodes, setup and run the API Server using [this](docs/INSTALL_AND_RUN.md) guide.
+
+
+
